@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --background:#202124;
+    --white:#fff;
+    --cell-size: 100px;
+    --mark-size: calc(var(--cell-size) * 0.9 );
+}
+
+body {
+    background-color: var(--background);
+}
+
+header{
+    text-align: center;
+    color: var(--white);
+    letter-spacing:2px;
+    font: 400 18pt 'Roboto', sans-serif;
+    margin: 64px 0 64px 0;
+}
+
+main.end{
+    filter:blur(8px) ;
+    justify-content: center;
+    align-items: center;
+}
+
+.board{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: repeat(3, auto);
+}
+
+.cell{
+    width: var(--cell-size);
+    height: var(--cell-size);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    border: 1px var(--white) solid;
+    border-top: none;
+    border-right: none;
+
+    cursor: pointer;
+    
+    position: relative;
+}
+
+.cell:nth-child(3n + 1){
+    border-left: none;
+}
+
+.cell:nth-child(n + 7){
+    border-bottom: none;
+}
+
+.cell.x::before,
+.cell.x::after, .cell.o::before{
+    background-color: white;
+}
+
+.board.x .cell:not(.x):not(.o):hover:before,
+.board.x .cell:not(.x):not(.o):hover:after, 
+.board.o .cell:not(.x):not(.o):hover:before{
+    background-color: #3d3d3d;
+}
+
+.board.x .cell:not(.x):not(.o):hover:before,
+.board.x .cell:not(.x):not(.o):hover:after,
+.cell.x::before,
+.cell.x::after{
+    content: "";
+    width:calc(var(--mark-size) * 0.15);
+    height: var(--mark-size);
+    
+
+    position: absolute;
+}
+
+.board.x .cell:hover::before,
+.cell.x::before{
+    transform: rotate(45deg);
+}
+
+.board.x .cell:hover::after,
+.cell.x::after{
+    transform: rotate(-45deg);
+}
+
+.board.o .cell:not(.x):not(.o):hover:before,
+.board.o .cell:not(.x):not(.o):hover:after,
+.cell.o::before,
+.cell.o::after{
+    content: "";
+    border-radius: 50%;
+    
+    position: absolute;
+}
+
+.board.o .cell:not(.x):not(.o):hover:before,
+.cell.o::before{
+    width:calc(var(--mark-size) * 0.9);
+    height: calc(var(--mark-size) * 0.9);
+
+   
+}
+
+.board.o .cell:not(.x):not(.o):hover:after,
+.cell.o::after{
+    width:calc(var(--mark-size) * 0.7);
+    height: calc(var(--mark-size) * 0.7);
+
+    background-color: var(--background);
+}
+
+.cell.x,
+.cell.o{
+    cursor: not-allowed;
+}
+
+.game-end-message{
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background-color:rgba(255, 255, 255, 0.9);
+
+    display:none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    font: 400 24pt 'Roboto', sans-serif;
+}
+
+.game-end-message button{
+    font-size: 14pt;
+    background-color: var(--background);
+    border: 1px solid var(--white);
+    color: var(--white);
+    padding:8px;
+    border-radius: 15px;
+    margin: 8px;
+
+    cursor: pointer;
+
+}
+
+.game-end-message button:hover{
+    filter: brightness(130%);
+}
+
+.game-end-message.show{
+    display: flex;
+}
